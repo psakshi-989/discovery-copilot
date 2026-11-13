@@ -1,0 +1,27 @@
+{
+  "case": "streaming-ops",
+  "must_capture": [
+    { "id": "G1", "what": "Must integrate with the existing custom CMS through its REST API; it cannot be replaced this year", "weight": 3 },
+    { "id": "G2", "what": "A human editor must approve everything; nothing may be published automatically", "weight": 3 },
+    { "id": "G3", "what": "Anything touching subtitles needs a full audit trail because licensors audit twice a year", "weight": 3 },
+    { "id": "G4", "what": "Cut time to go live from about nine working days to three", "weight": 3 },
+    { "id": "G5", "what": "Artwork requests sit waiting in a shared inbox, so requests need proper intake and tracking", "weight": 2 },
+    { "id": "G6", "what": "Artwork is resized by hand for each device today", "weight": 2 },
+    { "id": "G7", "what": "Localisation vendors return files in different formats that need normalising", "weight": 2 },
+    { "id": "G8", "what": "A dashboard showing which titles are stuck and why", "weight": 2 },
+    { "id": "G9", "what": "Every title needs artwork and metadata localised into six languages", "weight": 2 },
+    { "id": "G10", "what": "Volume is about 150 new titles and 400 metadata corrections per month", "weight": 1 }
+  ],
+  "must_flag": [
+    "The first-quarter relaunch deadline is tight and Daniel thinks it is too ambitious",
+    "Priya and Daniel disagree on whether subtitles belong in phase 1",
+    "The CMS API documentation is out of date, which is an integration risk"
+  ],
+  "traps": [
+    "Any budget or price figure (none was mentioned)",
+    "Any specific vendor, cloud provider or software tool the customer already uses (none was named besides their custom CMS)",
+    "The names of the six languages (not said)",
+    "The number or kinds of devices that need artwork (not said)"
+  ],
+  "hand_estimate_days": { "low": 35, "high": 65 }
+}

@@ -1,0 +1,977 @@
+{
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "judge": "qwen/qwen3.8-27b",
+  "aggregate": {
+    "runs": 1,
+    "weightedRecall": 0.9347826086956522,
+    "flagRecall": 0.3333333333333333,
+    "trapHitRate": 0,
+    "unsupportedRate": 0,
+    "meanDesignIssues": 2,
+    "evidenceRate": 1,
+    "estimateOverlapRate": 1,
+    "likelyInsideRate": 1,
+    "runsWithUncoveredMust": 1,
+    "runsNeedingRepair": 0,
+    "meanLatencyMs": 31985,
+    "meanTokens": 13102,
+    "judgeGaps": 0
+  },
+  "perCase": {
+    "insurance_claims": {
+      "runs": 1,
+      "weightedRecall": 0.9347826086956522,
+      "flagRecall": 0.3333333333333333,
+      "trapHitRate": 0,
+      "unsupportedRate": 0,
+      "meanDesignIssues": 2,
+      "evidenceRate": 1,
+      "estimateOverlapRate": 1,
+      "likelyInsideRate": 1,
+      "runsWithUncoveredMust": 1,
+      "runsNeedingRepair": 0,
+      "meanLatencyMs": 31985,
+      "meanTokens": 13102,
+      "judgeGaps": 0
+    }
+  },
+  "runs": [
+    {
+      "case": "insurance_claims",
+      "repeat": 1,
+      "score": {
+        "weightedRecall": 0.9347826086956522,
+        "flagRecall": 0.3333333333333333,
+        "trapHits": 0,
+        "trapCount": 4,
+        "unsupportedClaims": 0,
+        "designIssues": 2,
+        "requirementCount": 10,
+        "evidenceRate": 1,
+        "estimateOverlaps": true,
+        "likelyInside": true,
+        "uncoveredMust": 1,
+        "repairs": 0,
+        "latencyMs": 31985,
+        "tokens": 13102,
+        "judgeGaps": 0
+      },
+      "judged": {
+        "capture": [
+          {
+            "id": "G1",
+            "status": "captured",
+            "matched_ref": "R1",
+            "reason": "Same-day first-touch triage clearly stated in R1."
+          },
+          {
+            "id": "G2",
+            "status": "captured",
+            "matched_ref": "R5",
+            "reason": "SFTP nightly file exchange, no direct writes, captured in R5."
+          },
+          {
+            "id": "G3",
+            "status": "captured",
+            "matched_ref": "R3",
+            "reason": "Explainable decisions, no black box, in R3."
+          },
+          {
+            "id": "G4",
+            "status": "captured",
+            "matched_ref": "R4",
+            "reason": "Over $5,000 human adjuster sign-off in R4."
+          },
+          {
+            "id": "G5",
+            "status": "captured",
+            "matched_ref": "R8",
+            "reason": "No external training without legal review in R8."
+          },
+          {
+            "id": "G6",
+            "status": "captured",
+            "matched_ref": "R2",
+            "reason": "Missing-doc requests, <10% second request, 14% current in R2/metrics."
+          },
+          {
+            "id": "G7",
+            "status": "partial",
+            "matched_ref": "R1",
+            "reason": "Classification and assignment in R1; emails/PDFs/photos only in summary."
+          },
+          {
+            "id": "G8",
+            "status": "captured",
+            "matched_ref": "R10",
+            "reason": "No regulatory findings as success measure in R10."
+          },
+          {
+            "id": "G9",
+            "status": "partial",
+            "matched_ref": "R9",
+            "reason": "Chat assistant mentioned but only as excluded from Phase 1."
+          },
+          {
+            "id": "G10",
+            "status": "captured",
+            "matched_ref": "stated_metrics",
+            "reason": "900 claims/month in stated_metrics."
+          }
+        ],
+        "flags": [
+          {
+            "index": 0,
+            "status": "partial",
+            "reason": "Fraud exclusion noted but Dana/Imran disagreement and poor data quality not flagged."
+          },
+          {
+            "index": 1,
+            "status": "partial",
+            "reason": "October deadline risk noted but 'only realistic for triage alone' nuance missing."
+          },
+          {
+            "index": 2,
+            "status": "missed",
+            "reason": "Dana/Imran disagreement on sub-$5k adjuster review not raised anywhere."
+          }
+        ],
+        "traps": [
+          {
+            "index": 0,
+            "asserted": false,
+            "reason": "No budget or price figure stated."
+          },
+          {
+            "index": 1,
+            "asserted": false,
+            "reason": "User count only an assumption, not stated as fact."
+          },
+          {
+            "index": 2,
+            "asserted": false,
+            "reason": "Cloud provider explicitly left unspecified."
+          },
+          {
+            "index": 3,
+            "asserted": false,
+            "reason": "Only 'regulator' used, no named regulator or regulation."
+          }
+        ],
+        "unsupported_claims": [],
+        "design_issues": [
+          {
+            "ref": "C1",
+            "issue": "Assumes SFTP export is CSV/fixed-width flat file; transcript never stated format."
+          },
+          {
+            "ref": "C4",
+            "issue": "Assumes access to an SMTP relay for sending emails; not stated in transcript."
+          }
+        ]
+      },
+      "result": {
+        "provider": "groq",
+        "model": "openai/gpt-oss-120b",
+        "extraction": {
+          "report": {
+            "customer": {
+              "name": "Harbourline Mutual",
+              "industry": "Insurance",
+              "summary": "Small general insurer (home and motor) seeking same‑day claim triage, reduced document request cycles, explainable decisions, and compliance with regulator constraints, to be live by October."
+            },
+            "requirements": [
+              {
+                "id": "R1",
+                "type": "functional",
+                "statement": "Perform first‑touch claim triage (classification and assignment) within the same business day for most claims.",
+                "priority": "should",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "I want that to be same day."
+                  },
+                  {
+                    "quote": "Same-day triage for most claims"
+                  }
+                ]
+              },
+              {
+                "id": "R2",
+                "type": "functional",
+                "statement": "Automatically request missing documents and keep the rate of second‑request cycles below ten percent of claims.",
+                "priority": "should",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "fewer than ten percent needing a second request for documents."
+                  }
+                ]
+              },
+              {
+                "id": "R3",
+                "type": "non_functional",
+                "statement": "All automated decision logic must be fully explainable to regulators; no black‑box models may be used.",
+                "priority": "must",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "every decision has to be explainable to the regulator, so no black box"
+                  }
+                ]
+              },
+              {
+                "id": "R4",
+                "type": "constraint",
+                "statement": "Claims with a payout amount over $5,000 must be reviewed and signed off by a human adjuster before closure.",
+                "priority": "must",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "any claim over five thousand dollars must be signed off by a human adjuster"
+                  }
+                ]
+              },
+              {
+                "id": "R5",
+                "type": "integration",
+                "statement": "Exchange data with the legacy policy system exclusively via nightly SFTP file export/import; no direct API calls.",
+                "priority": "must",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "It does a nightly file export and import over SFTP, and that's it."
+                  },
+                  {
+                    "quote": "So whatever we build exchanges files with it."
+                  }
+                ]
+              },
+              {
+                "id": "R6",
+                "type": "functional",
+                "statement": "Phase 1 scope is limited to triage and missing‑document request functionality; fraud scoring is excluded.",
+                "priority": "should",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "I’d keep fraud out of the first release."
+                  },
+                  {
+                    "quote": "Not in phase one."
+                  }
+                ]
+              },
+              {
+                "id": "R7",
+                "type": "constraint",
+                "statement": "Deploy the Phase 1 solution no later than October to be ready for storm season.",
+                "priority": "should",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "Before storm season, so by October."
+                  }
+                ]
+              },
+              {
+                "id": "R8",
+                "type": "constraint",
+                "statement": "Customer data may not be sent to any external party for model training without a completed legal review.",
+                "priority": "must",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "we can't send customer data to an outside party for training without legal review"
+                  }
+                ]
+              },
+              {
+                "id": "R9",
+                "type": "constraint",
+                "statement": "A customer chat assistant is not to be included in Phase 1.",
+                "priority": "must",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "Please, no. Not until we've done triage properly."
+                  }
+                ]
+              },
+              {
+                "id": "R10",
+                "type": "success_metric",
+                "statement": "The solution must avoid any regulatory findings during operation.",
+                "priority": "must",
+                "confidence": "high",
+                "evidence": [
+                  {
+                    "quote": "And no regulatory findings."
+                  }
+                ]
+              }
+            ],
+            "stakeholders": [
+              {
+                "name": "Dana",
+                "role": "Claims Manager",
+                "concern": "Speed of triage and reduction of document request cycles."
+              },
+              {
+                "name": "Imran",
+                "role": "Compliance Lead",
+                "concern": "Regulatory explainability, human sign‑off thresholds, and data‑privacy."
+              }
+            ],
+            "stated_metrics": [
+              {
+                "name": "monthly_claim_volume",
+                "value": 900,
+                "unit": "claims/month",
+                "evidence": {
+                  "quote": "We get roughly 900 new claims a month."
+                }
+              },
+              {
+                "name": "current_missing_document_rate",
+                "value": 14,
+                "unit": "percent",
+                "evidence": {
+                  "quote": "About fourteen percent of claims need extra documents"
+                }
+              },
+              {
+                "name": "target_same_day_triage_rate",
+                "value": null,
+                "unit": "percent",
+                "evidence": {
+                  "quote": "Same-day triage for most claims"
+                }
+              },
+              {
+                "name": "target_second_request_rate",
+                "value": 10,
+                "unit": "percent",
+                "evidence": {
+                  "quote": "fewer than ten percent needing a second request for documents"
+                }
+              },
+              {
+                "name": "human_signoff_threshold",
+                "value": 5000,
+                "unit": "USD",
+                "evidence": {
+                  "quote": "any claim over five thousand dollars must be signed off by a human adjuster"
+                }
+              },
+              {
+                "name": "go_live_deadline",
+                "value": null,
+                "unit": "month",
+                "evidence": {
+                  "quote": "Before storm season, so by October."
+                }
+              }
+            ],
+            "open_questions": [
+              {
+                "question": "What percentage of claims qualifies as \"most\" for the same‑day triage success metric?",
+                "why_it_matters": "Needed to set a measurable target and evaluate system performance."
+              },
+              {
+                "question": "What level of explainability (e.g., audit trail, rule traceability) is required for regulator approval?",
+                "why_it_matters": "Ensures the solution meets the \"no black box\" constraint."
+              },
+              {
+                "question": "What is the formal legal review process for any external data usage or model training?",
+                "why_it_matters": "Prevents violation of data‑privacy policies and regulatory penalties."
+              },
+              {
+                "question": "What file format and schema will the nightly SFTP export/import use?",
+                "why_it_matters": "Critical for designing the integration layer."
+              },
+              {
+                "question": "How will the human adjuster sign‑off for claims > $5,000 be operationalized in the workflow?",
+                "why_it_matters": "Ensures the system can enforce the mandatory human review rule."
+              }
+            ],
+            "risks": [
+              {
+                "risk": "Regulatory non‑compliance if decision logic is not fully explainable.",
+                "severity": "high"
+              },
+              {
+                "risk": "Missing the October go‑live deadline for triage functionality.",
+                "severity": "high"
+              },
+              {
+                "risk": "Integration challenges with a 15‑year‑old policy system that only supports nightly SFTP.",
+                "severity": "medium"
+              },
+              {
+                "risk": "Potential data‑privacy breach if external training data is used without proper legal clearance.",
+                "severity": "high"
+              }
+            ],
+            "assumptions": [
+              "The existing policy system can accept and produce files via SFTP on a nightly schedule without additional development.",
+              "The definition of \"most claims\" for same-day triage is at least 80% of incoming claims.",
+              "Human adjuster sign‑off workflow can be integrated into the new system without changing the legacy system."
+            ]
+          },
+          "evidence": {
+            "total": 19,
+            "valid": 19,
+            "rate": 1,
+            "invalid": []
+          },
+          "meta": {
+            "usage": {
+              "inputTokens": 1564,
+              "outputTokens": 2994
+            },
+            "latencyMs": 15995,
+            "model": "openai/gpt-oss-120b",
+            "attempts": 1
+          }
+        },
+        "design": {
+          "data": {
+            "components": [
+              {
+                "id": "C1",
+                "name": "SFTP Ingestion Service",
+                "responsibility": "Pull nightly export files from legacy policy system via SFTP, parse and load claim and policy data into internal database.",
+                "tech": "Python script scheduled with cron or managed scheduler, storing data in PostgreSQL",
+                "build_or_buy": "build",
+                "satisfies": [
+                  "R5"
+                ],
+                "size": "S",
+                "size_rationale": "Simple scheduled file fetch and CSV parsing; 2‑4 days."
+              },
+              {
+                "id": "C2",
+                "name": "Claim Intake API",
+                "responsibility": "Accept new claim submissions (web or email attachment), validate, and persist initial claim record.",
+                "tech": "Node.js (Express) + PostgreSQL",
+                "build_or_buy": "build",
+                "satisfies": [],
+                "size": "S",
+                "size_rationale": "REST endpoint with basic validation; 2‑4 days."
+              },
+              {
+                "id": "C3",
+                "name": "Rule‑Based Triage Engine",
+                "responsibility": "Classify incoming claims and assign to appropriate adjuster queue using explainable decision tables.",
+                "tech": "Drools rule engine + Java service",
+                "build_or_buy": "build",
+                "satisfies": [
+                  "R1",
+                  "R3"
+                ],
+                "size": "M",
+                "size_rationale": "Implement decision tables (e.g., Drools) and integrate with claim DB; 5‑10 days."
+              },
+              {
+                "id": "C4",
+                "name": "Missing Document Automation Service",
+                "responsibility": "Detect missing required documents, generate templated email requests, track responses, and trigger second‑request if needed.",
+                "tech": "Managed workflow tool (e.g., n8n) with SMTP connector",
+                "build_or_buy": "build",
+                "satisfies": [
+                  "R2",
+                  "R3",
+                  "R8"
+                ],
+                "size": "M",
+                "size_rationale": "Workflow with email templating and state tracking; 5‑10 days."
+              },
+              {
+                "id": "C5",
+                "name": "High‑Payout Human Sign‑off UI",
+                "responsibility": "Present claims > $5,000 to a senior adjuster for review and digital signature before closure.",
+                "tech": "React front‑end + Node.js backend, storing approvals in PostgreSQL",
+                "build_or_buy": "build",
+                "satisfies": [
+                  "R4",
+                  "R3",
+                  "R10"
+                ],
+                "size": "M",
+                "size_rationale": "Simple web UI with audit logging; 5‑10 days."
+              },
+              {
+                "id": "C6",
+                "name": "Audit & Compliance Logging Service",
+                "responsibility": "Record every decision, rule evaluation, document request, and human sign‑off with immutable timestamps for regulator review.",
+                "tech": "Managed ELK stack (Elasticsearch, Logstash, Kibana) with API ingestion",
+                "build_or_buy": "buy",
+                "satisfies": [
+                  "R3",
+                  "R8",
+                  "R10"
+                ],
+                "size": "S",
+                "size_rationale": "Managed logging platform (e.g., Elastic Cloud) with minimal configuration; 2‑4 days."
+              },
+              {
+                "id": "C7",
+                "name": "Operations Dashboard",
+                "responsibility": "Display same‑day triage rate, missing‑document request rate, second‑request rate, and compliance alerts.",
+                "tech": "Grafana connected to PostgreSQL and Elasticsearch",
+                "build_or_buy": "build",
+                "satisfies": [
+                  "R10"
+                ],
+                "size": "S",
+                "size_rationale": "Dashboard pulling from PostgreSQL and ELK; 2‑4 days."
+              },
+              {
+                "id": "C8",
+                "name": "Workflow Orchestration Engine",
+                "responsibility": "Coordinate claim flow: intake → triage → missing‑document check → high‑payout sign‑off → closure, ensuring state persistence and hand‑offs.",
+                "tech": "Managed workflow service with REST connectors",
+                "build_or_buy": "buy",
+                "satisfies": [
+                  "R1",
+                  "R2",
+                  "R4",
+                  "R6",
+                  "R7"
+                ],
+                "size": "L",
+                "size_rationale": "Managed BPM/Workflow service (e.g., Camunda Cloud) integration with multiple components; 10‑20 days."
+              }
+            ],
+            "integrations": [
+              {
+                "system": "Legacy Policy System",
+                "method": "Nightly SFTP pull of CSV/flat‑file exports",
+                "risk": "Medium – requires secure key management and file‑format agreement"
+              }
+            ],
+            "mermaid_diagram": "flowchart LR\n    A[Legacy Policy SFTP Export] --> B[SFTP Ingestion Service]\n    B --> C[Claim Database]\n    D[Claim Intake API] --> C\n    C --> E[Rule‑Based Triage Engine]\n    E --> F[Workflow Orchestration Engine]\n    F --> G[Missing Document Automation Service]\n    F --> H[High‑Payout Human Sign‑off UI]\n    H --> I[Claim Closure]\n    C --> J[Operations Dashboard]\n    F --> J",
+            "tradeoffs": [
+              {
+                "decision": "Build custom rule‑engine",
+                "alternative": "Buy a commercial explainable AI decision service",
+                "reason": "Open‑source rule tables guarantee full auditability and avoid vendor lock‑in, aligning with strict regulator explainability requirement."
+              },
+              {
+                "decision": "Buy managed workflow engine",
+                "alternative": "Custom code orchestration for claim flow",
+                "reason": "Reduces development effort and provides built‑in state persistence and audit logs, helping meet the October deadline."
+              },
+              {
+                "decision": "Use cloud‑agnostic managed services",
+                "alternative": "Store all data on‑prem for maximum control",
+                "reason": "Accelerates delivery and leverages built‑in security/compliance features; on‑prem would add infrastructure overhead and delay go‑live."
+              },
+              {
+                "decision": "Use simple SMTP relay",
+                "alternative": "Integrate with a third‑party email platform for document requests",
+                "reason": "Low claim volume makes a lightweight SMTP approach sufficient and avoids additional licensing costs."
+              }
+            ],
+            "savings_drivers": [
+              {
+                "name": "Claim triage time reduction",
+                "items_per_month": 900,
+                "minutes_saved_low": 5000,
+                "minutes_saved_likely": 6300,
+                "minutes_saved_high": 8000,
+                "volume_source": "stated",
+                "minutes_source": "assumed",
+                "note": "Automated rule‑based triage cuts manual review from ~15 min to ~5 min for most claims."
+              },
+              {
+                "name": "Missing‑document request handling",
+                "items_per_month": 126,
+                "minutes_saved_low": 800,
+                "minutes_saved_likely": 1000,
+                "minutes_saved_high": 1200,
+                "volume_source": "assumed",
+                "minutes_source": "assumed",
+                "note": "Automated email generation and tracking reduces manual effort per request."
+              },
+              {
+                "name": "Second‑request cycle reduction",
+                "items_per_month": 36,
+                "minutes_saved_low": 150,
+                "minutes_saved_likely": 180,
+                "minutes_saved_high": 210,
+                "volume_source": "assumed",
+                "minutes_source": "assumed",
+                "note": "Lowering second‑request rate from 14% to target 10% saves follow‑up work."
+              }
+            ],
+            "assumptions": [
+              "Cloud provider not specified; solution will be cloud‑agnostic (e.g., can run on AWS, Azure, GCP, or on‑prem VM).",
+              "File format and schema of the nightly SFTP export are unknown; assume CSV or fixed‑width flat file that can be parsed into claim records.",
+              "Email delivery mechanism not specified; assume access to an SMTP relay for sending document‑request emails.",
+              "Regulatory explainability requirement will be satisfied with rule‑engine audit trails and decision tables; exact audit‑trail format not defined.",
+              "Number of internal users (adjusters, triage staff) not provided; sizing assumes a small team (≤20)."
+            ]
+          },
+          "meta": {
+            "usage": {
+              "inputTokens": 1692,
+              "outputTokens": 3339
+            },
+            "latencyMs": 7717,
+            "model": "openai/gpt-oss-120b",
+            "attempts": 1
+          }
+        },
+        "designChecks": {
+          "componentCount": 8,
+          "danglingRefs": [],
+          "uncoveredMust": [
+            "R9"
+          ],
+          "mermaidLooksValid": true,
+          "unorderedDrivers": []
+        },
+        "driverSourceFixes": [
+          "Claim triage time reduction: volume assumed -> stated"
+        ],
+        "estimate": {
+          "config": {
+            "currency": "INR",
+            "symbol": "₹",
+            "dayRate": 10000,
+            "staffHourlyCost": 600,
+            "contingency": 0.2
+          },
+          "lines": [
+            {
+              "component": "SFTP Ingestion Service",
+              "size": "S",
+              "low": 2,
+              "high": 4
+            },
+            {
+              "component": "Claim Intake API",
+              "size": "S",
+              "low": 2,
+              "high": 4
+            },
+            {
+              "component": "Rule‑Based Triage Engine",
+              "size": "M",
+              "low": 5,
+              "high": 10
+            },
+            {
+              "component": "Missing Document Automation Service",
+              "size": "M",
+              "low": 5,
+              "high": 10
+            },
+            {
+              "component": "High‑Payout Human Sign‑off UI",
+              "size": "M",
+              "low": 5,
+              "high": 10
+            },
+            {
+              "component": "Audit & Compliance Logging Service",
+              "size": "S",
+              "low": 2,
+              "high": 4
+            },
+            {
+              "component": "Operations Dashboard",
+              "size": "S",
+              "low": 2,
+              "high": 4
+            },
+            {
+              "component": "Workflow Orchestration Engine",
+              "size": "L",
+              "low": 10,
+              "high": 20
+            }
+          ],
+          "effortDays": {
+            "low": 33,
+            "likely": 59.4,
+            "high": 79.2
+          },
+          "buildCost": {
+            "low": 330000,
+            "likely": 594000,
+            "high": 792000
+          },
+          "monthlyHoursSaved": {
+            "low": 76770,
+            "likely": 96708,
+            "high": 122646
+          },
+          "annualSavings": {
+            "low": 552744000,
+            "likely": 696297600,
+            "high": 883051200
+          },
+          "firstYearNet": {
+            "pessimistic": 551952000,
+            "likely": 695703600,
+            "optimistic": 882721200
+          },
+          "paybackMonths": {
+            "pessimistic": 0,
+            "likely": 0,
+            "optimistic": 0
+          },
+          "quantifiedDrivers": [
+            "Claim triage time reduction",
+            "Missing‑document request handling",
+            "Second‑request cycle reduction"
+          ],
+          "skippedDrivers": [],
+          "assumedDriverCount": 3,
+          "caveats": [
+            "Build cost excludes recurring licence or hosting costs for 2 bought or integrated component(s): Audit & Compliance Logging Service, Workflow Orchestration Engine.",
+            "Savings count staff time only. The customer's cycle-time goal is not converted into money.",
+            "3 of 3 savings drivers rely on assumed numbers."
+          ]
+        },
+        "demo": {
+          "data": {
+            "app_name": "Harbourline Claim Triage",
+            "tagline": "Fast, Transparent Claims, Built for Compliance",
+            "theme": {
+              "primary": "#0066CC",
+              "tone": "corporate"
+            },
+            "screens": [
+              {
+                "id": "screen_intake",
+                "title": "New Claim Intake",
+                "purpose": "Capture claim details",
+                "blocks": [
+                  {
+                    "type": "form",
+                    "title": "Claim Intake Form",
+                    "columns": [
+                      "Claim ID",
+                      "Policy Number",
+                      "Claim Type",
+                      "Incident Date",
+                      "Estimated Payout"
+                    ],
+                    "rows": [
+                      [
+                        "CLM-1001",
+                        "POL-2005",
+                        "Home Fire",
+                        "2024-10-03",
+                        "$4,200"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "screen_triage",
+                "title": "Triage Overview",
+                "purpose": "Show classification and assignment status",
+                "blocks": [
+                  {
+                    "type": "timeline",
+                    "title": "Claim Processing Timeline",
+                    "columns": [
+                      "Step",
+                      "Status"
+                    ],
+                    "rows": [
+                      [
+                        "Intake Received",
+                        "Completed"
+                      ],
+                      [
+                        "Classification",
+                        "In Progress"
+                      ],
+                      [
+                        "Assignment",
+                        "Pending"
+                      ]
+                    ]
+                  },
+                  {
+                    "type": "stat_row",
+                    "title": "Key Metrics",
+                    "columns": [
+                      "Metric",
+                      "Value"
+                    ],
+                    "rows": [
+                      [
+                        "Same‑Day Triage Rate",
+                        "92%"
+                      ],
+                      [
+                        "Missing‑Doc Request Rate",
+                        "85%"
+                      ],
+                      [
+                        "Second‑Request Rate",
+                        "7%"
+                      ],
+                      [
+                        "Compliance Alerts",
+                        "0"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "screen_documents",
+                "title": "Missing Document Management",
+                "purpose": "Track document requests",
+                "blocks": [
+                  {
+                    "type": "table",
+                    "title": "Pending Document Requests",
+                    "columns": [
+                      "Claim ID",
+                      "Policy Number",
+                      "Missing Document",
+                      "Request Sent",
+                      "Second Request?"
+                    ],
+                    "rows": [
+                      [
+                        "CLM-1002",
+                        "POL-2010",
+                        "Proof of Damage",
+                        "2024-10-05",
+                        "No"
+                      ],
+                      [
+                        "CLM-1003",
+                        "POL-2022",
+                        "Police Report",
+                        "2024-10-04",
+                        "Yes"
+                      ],
+                      [
+                        "CLM-1004",
+                        "POL-2033",
+                        "Repair Estimate",
+                        "2024-10-06",
+                        "No"
+                      ]
+                    ]
+                  },
+                  {
+                    "type": "chart",
+                    "title": "Second‑Request Rate by Week",
+                    "columns": [
+                      "Week",
+                      "Second Requests %"
+                    ],
+                    "rows": [
+                      [
+                        "Week 1",
+                        "5"
+                      ],
+                      [
+                        "Week 2",
+                        "8"
+                      ],
+                      [
+                        "Week 3",
+                        "6"
+                      ]
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "screen_signoff",
+                "title": "High‑Payout Review",
+                "purpose": "Human adjuster sign‑off for >$5k claims",
+                "blocks": [
+                  {
+                    "type": "card_grid",
+                    "title": "Claims Requiring Sign‑off",
+                    "columns": [
+                      "Claim ID",
+                      "Adjuster",
+                      "Payout Amount",
+                      "Review Status",
+                      "Signed By"
+                    ],
+                    "rows": [
+                      [
+                        "CLM-1005",
+                        "Senior Adjuster Jane",
+                        "$7,800",
+                        "Pending",
+                        ""
+                      ],
+                      [
+                        "CLM-1010",
+                        "Senior Adjuster Mark",
+                        "$12,300",
+                        "Reviewed",
+                        "Mark S."
+                      ]
+                    ]
+                  },
+                  {
+                    "type": "timeline",
+                    "title": "Sign‑off Process",
+                    "columns": [
+                      "Step",
+                      "Status"
+                    ],
+                    "rows": [
+                      [
+                        "Review by Senior Adjuster",
+                        "In Progress"
+                      ],
+                      [
+                        "Digital Signature",
+                        "Pending"
+                      ],
+                      [
+                        "Closure",
+                        "Pending"
+                      ]
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "meta": {
+            "usage": {
+              "inputTokens": 1276,
+              "outputTokens": 2237
+            },
+            "latencyMs": 8273,
+            "model": "openai/gpt-oss-120b",
+            "attempts": 1
+          }
+        },
+        "demoChecks": {
+          "screenCount": 4,
+          "primaryIsHex": true,
+          "raggedBlocks": []
+        },
+        "totals": {
+          "latencyMs": 31985,
+          "inputTokens": 4532,
+          "outputTokens": 8570,
+          "repairsNeeded": 0
+        }
+      }
+    }
+  ]
+}

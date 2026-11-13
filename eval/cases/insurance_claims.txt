@@ -1,0 +1,51 @@
+Pat (Technical Consultant): Thanks for having me. Cold snap in Melbourne this week, I hear?
+
+Dana (Claims Manager, Harbourline Mutual): Don't remind me. Right, where do I start. We're a small general insurer, home and motor. We get roughly 900 new claims a month. They arrive as emails, PDFs and photos, and the first-touch triage, which is deciding what the claim is and who should handle it, takes about two days. I want that to be same day.
+
+Pat: What happens in those two days?
+
+Dana: A claims officer reads the email, opens the attachments, types the details into our policy system, and asks the customer for whatever is missing. About fourteen percent of claims need extra documents, and every round trip costs another day or two.
+
+Imran (Compliance Lead): The policy system matters here. It's about fifteen years old, there's no API. It does a nightly file export and import over SFTP, and that's it. We cannot replace it this year.
+
+Pat: So whatever we build exchanges files with it.
+
+Imran: Yes. Nothing writes to it directly.
+
+Pat: Constraints on the decisions themselves?
+
+Imran: Two. First, every decision has to be explainable to the regulator, so no black box that says approve or deny. Second, any claim over five thousand dollars must be signed off by a human adjuster. That's policy, not a preference.
+
+Dana: And honestly even under five thousand, I'd like an adjuster to see everything before it's closed.
+
+Imran: That's a conversation, Dana. The five thousand threshold is the rule.
+
+Pat: What would you like in a first release?
+
+Dana: Triage and missing document requests. And fraud flagging. We have eight years of claims, so we can spot patterns.
+
+Imran: I'd keep fraud out of the first release. Fraud scoring is its own regulatory process and I don't want it sneaking in with triage. Also, I wouldn't call that data eight years of anything useful. The quality is poor, and we can't send customer data to an outside party for training without legal review.
+
+Dana: We could at least try it.
+
+Imran: Not in phase one.
+
+Pat: Noted. Anything on the wish list?
+
+Dana: A customer chat assistant, so people can ask where their claim is. Someone mentioned it at a conference.
+
+Imran: Please, no. Not until we've done triage properly.
+
+Dana: And generally I want to use AI to cut fraud. That's what the board keeps asking me.
+
+Pat: When does this need to be live?
+
+Dana: Before storm season, so by October. We had a nightmare last year when volume tripled for two weeks.
+
+Imran: October is possible for triage only. I'd be nervous about anything more.
+
+Pat: What does success look like?
+
+Dana: Same-day triage for most claims, and fewer than ten percent needing a second request for documents.
+
+Imran: And no regulatory findings. That's the one I care about.

@@ -1,0 +1,45 @@
+Hana (Head of Content Quality, Tessellate): Thanks for fitting us in, I know it's the week before everyone disappears for the holidays.
+
+Marcus (Solutions Consultant): Not at all. How was the trip back from Lisbon?
+
+Hana: Long. Anyway. For context, Tessellate is a template marketplace. Designers contribute templates, customers use them for social posts, decks, that kind of thing. We get about 1,200 new submissions a week.
+
+Marcus: And what happens to a submission today?
+
+Hana: A reviewer opens it in our admin tool and checks three things: is the artwork original, are the fonts properly licensed, and is it brand-safe, meaning nothing hateful or misleading. Then they approve or reject with a reason. Contributors wait about six days on average and it's costing us. Our best contributors are leaving for other platforms. I want that down to 48 hours.
+
+Rohan (Platform Engineering Manager): To be fair, about nine percent of submissions get rejected for rights issues, mostly copied artwork or fonts nobody paid for. Those take the longest because the reviewer has to go and look things up.
+
+Hana: Right. And one hard rule from legal: if a template uses a third-party font, a human has to verify the licence. We can't auto-approve those, ever.
+
+Marcus: Understood. What does the admin tool look like technically?
+
+Rohan: It's an internal tool. It has a webhook that fires when a submission changes status, and an endpoint to set a status, but nothing for bulk edits. And we are not touching the checkout service this quarter, so nothing can depend on that.
+
+Marcus: What would you like to see first?
+
+Hana: Pre-screening. Something that looks at a submission before a human does and says this one looks clean, this one has a font problem, this one looks copied. The reviewers should see why it was flagged. Start with that.
+
+Rohan: I'd start somewhere else. Our tagging data is a mess. Half the templates have inconsistent categories, and any screening that leans on tags will be garbage. I'd rather clean the tags first.
+
+Hana: We can't wait on a data cleanup. The contributor conference is in March and I want contributors to see a visible change by then.
+
+Rohan: A visible change is fine, but I don't want to promise the 48 hours by March.
+
+Marcus: Noted, we'll come back to the sequencing. Anything else on the wish list?
+
+Hana: It would be great if contributors could see where their submission is, like a status page. Rohan thinks that's phase two.
+
+Rohan: It is phase two. Also, honestly, Hana has asked for search that understands vibes. Moody versus minimal.
+
+Hana: I'd love that, yes. I don't know what it takes. Just make search smarter.
+
+Marcus: We'll treat search as a separate conversation. What counts as success for the first phase?
+
+Hana: Median review time under 48 hours and no increase in rights complaints. That second part matters; one bad takedown gets us a letter from a lawyer.
+
+Rohan: And reviewers keep the final say. The tool suggests, they decide.
+
+Marcus: Last question, who signs off?
+
+Hana: Me, and legal for anything touching fonts.

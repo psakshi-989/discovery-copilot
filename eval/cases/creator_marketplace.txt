@@ -1,0 +1,53 @@
+Jess (Solutions Engineer): Morning both. Did the new office coffee machine survive the week?
+
+Kofi (Engineering Lead, Folio Market): Barely. Thanks for joining. Marta, do you want to explain the problem?
+
+Marta (Head of Finance Operations): Sure. Folio is a marketplace where illustrators sell digital art packs. Every month we pay out around 3,500 creators in about 40 countries. We pay through Stripe Connect, and we hold everything in Postgres.
+
+Jess: What goes wrong?
+
+Marta: The reconciliation. Finance exports sales from our database, exports payouts from Stripe, and matches them in spreadsheets. It takes four days after month end. Two to three percent of payouts end up disputed, usually a currency conversion or a refund that landed after the cut-off. I want us closed by day two.
+
+Kofi: And an audit is coming in the second quarter. The auditors will ask us to show how every payout was calculated, line by line.
+
+Jess: So an explainable trail per payout?
+
+Marta: Yes. Every payout line has to trace back to the sales that produced it. That's non-negotiable.
+
+Kofi: The other hard one is data residency. EU creators' personal data has to stay in the EU. Our data protection officer is strict about it, and I'm not going to argue with her.
+
+Jess: Does that apply to the reconciliation data too?
+
+Kofi: Anything with a creator's name or bank details, yes.
+
+Jess: Okay. Second topic?
+
+Marta: Takedowns. We get around sixty copyright takedown requests a month, all by email. Legal wants every one answered within 48 hours, and sometimes we miss it because it sits in someone's inbox over a weekend.
+
+Kofi: That's a different problem from reconciliation, and I'd keep it out of the first release.
+
+Marta: I disagree. A missed takedown is a legal risk, reconciliation is only an annoyance.
+
+Kofi: Reconciliation is blocking the audit. That's the deadline.
+
+Marta: Fine, but I want both on the roadmap.
+
+Jess: Let's come back to ordering. Anything you'd like that isn't urgent?
+
+Marta: It would be lovely if creators could see their earnings and upcoming payout themselves. They email us constantly asking where their money is.
+
+Kofi: Stripe's dashboard shows some of that. I'd build a thin layer on top of Stripe reporting rather than a whole new reconciliation tool.
+
+Marta: I'd rather have one place where finance can see everything.
+
+Jess: And what would you say success looks like?
+
+Marta: Fewer surprises. Honestly, that's the whole thing. If I could stop being surprised at month end, I'd be happy.
+
+Kofi: Measurable version: reconciliation closed by day two and disputes under one percent.
+
+Marta: Fine. And nothing pays out without a person approving the batch. That stays.
+
+Jess: Understood. Q2 for the audit, then?
+
+Kofi: Q2 for the audit, yes, though I think it's ambitious given the residency work.

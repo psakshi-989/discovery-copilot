@@ -1,0 +1,32 @@
+{
+  "name": "discovery-copilot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "stage1": "tsx --env-file=.env scripts/run-stage1.ts",
+    "pipeline": "tsx --env-file=.env scripts/run-pipeline.ts",
+    "eval": "tsx --env-file=.env scripts/run-eval.ts",
+    "export-examples": "tsx scripts/export-examples.ts"
+  },
+  "dependencies": {
+    "mermaid": "^11.4.0",
+    "next": "^16.0.0",
+    "pg": "^8.13.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/pg": "^8.11.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}

@@ -1,0 +1,31 @@
+Priya (Head of Content Operations, Lumen Streaming): Thanks for making time. Quick background: we run a regional streaming service, about 4,000 titles, and every title needs artwork and metadata localised into six languages before it goes live.
+
+Marco (Solutions Engineer): Great. Walk me through how that works today.
+
+Priya: It's a mess, honestly. Editors get a spreadsheet from licensing, they email the artwork team, the artwork team resizes images by hand for each device, and then someone copies everything into our CMS. A new title takes about nine working days to go live. Our target is three.
+
+Marco: Where does the time go?
+
+Priya: Mostly waiting. Artwork requests sit in a shared inbox. And localisation vendors send back files in different formats.
+
+Daniel (Engineering Lead): I'd add that the CMS is a custom system. It has a REST API but the documentation is out of date. We can't replace it this year, that's a hard constraint.
+
+Marco: Understood, so we integrate with it rather than replace it. What volume are we talking about?
+
+Priya: Around 150 new titles a month, plus roughly 400 metadata corrections.
+
+Daniel: Also, anything that touches subtitles has to keep a full audit trail. Our licensors audit us twice a year.
+
+Priya: And honestly I'd love a dashboard where I can see which titles are stuck and why. Right now I find out when someone shouts at me.
+
+Marco: Is there a deadline?
+
+Priya: We relaunch in the first quarter. Daniel thinks that's too ambitious.
+
+Daniel: I think it's tight, yes. I'd rather start with artwork and metadata, and leave subtitles for a second phase.
+
+Priya: I disagree. Subtitles are where the delays are worst. But fine, let's talk about it.
+
+Marco: We'll come back to phasing. Last thing, who approves final output?
+
+Priya: Always a human editor. We will not publish anything automatically.

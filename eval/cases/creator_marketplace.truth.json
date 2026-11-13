@@ -1,0 +1,27 @@
+{
+  "case": "creator_marketplace",
+  "must_capture": [
+    { "id": "G1", "what": "Close monthly payout reconciliation by day two after month end, down from four days", "weight": 3 },
+    { "id": "G2", "what": "Every payout line must trace back to the sales that produced it, for the second-quarter audit", "weight": 3 },
+    { "id": "G3", "what": "EU creators' personal data (names, bank details) must stay in the EU, including in reconciliation data", "weight": 3 },
+    { "id": "G4", "what": "A person must approve each payout batch; nothing pays out automatically", "weight": 3 },
+    { "id": "G5", "what": "Every copyright takedown request must be answered within 48 hours; about 60 a month arrive by email", "weight": 3 },
+    { "id": "G6", "what": "Reduce disputed payouts from 2-3% to under 1%", "weight": 2 },
+    { "id": "G7", "what": "Handle the usual causes of disputes: currency conversion and refunds landing after the cut-off", "weight": 2 },
+    { "id": "G8", "what": "Build on the existing stack: payouts through Stripe Connect, data in Postgres", "weight": 2 },
+    { "id": "G9", "what": "Creators can see their own earnings and upcoming payout", "weight": 1 },
+    { "id": "G10", "what": "Scale is about 3,500 creators in about 40 countries, paid monthly", "weight": 1 }
+  ],
+  "must_flag": [
+    "The second-quarter audit deadline is ambitious given the data residency work, as Kofi says",
+    "Marta and Kofi disagree on whether takedown handling belongs in the first release",
+    "Marta and Kofi disagree on one finance reconciliation tool versus a thin layer over Stripe reporting"
+  ],
+  "traps": [
+    "Any budget or price figure (none was mentioned)",
+    "The number of finance staff or any headcount (not said)",
+    "A specific EU region, cloud provider or hosting vendor (none was named)",
+    "A specific audit date or auditor name (only 'the second quarter' was said)"
+  ],
+  "hand_estimate_days": { "low": 45, "high": 85 }
+}

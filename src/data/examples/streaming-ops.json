@@ -1,0 +1,713 @@
+{
+ "id": "streaming-ops",
+ "title": "Streaming service content operations",
+ "createdAt": "2026-11-12T12:23:28.000Z",
+ "transcript": "Priya (Head of Content Operations, Lumen Streaming): Thanks for making time. Quick background: we run a regional streaming service, about 4,000 titles, and every title needs artwork and metadata localised into six languages before it goes live.\n\nMarco (Solutions Engineer): Great. Walk me through how that works today.\n\nPriya: It's a mess, honestly. Editors get a spreadsheet from licensing, they email the artwork team, the artwork team resizes images by hand for each device, and then someone copies everything into our CMS. A new title takes about nine working days to go live. Our target is three.\n\nMarco: Where does the time go?\n\nPriya: Mostly waiting. Artwork requests sit in a shared inbox. And localisation vendors send back files in different formats.\n\nDaniel (Engineering Lead): I'd add that the CMS is a custom system. It has a REST API but the documentation is out of date. We can't replace it this year, that's a hard constraint.\n\nMarco: Understood, so we integrate with it rather than replace it. What volume are we talking about?\n\nPriya: Around 150 new titles a month, plus roughly 400 metadata corrections.\n\nDaniel: Also, anything that touches subtitles has to keep a full audit trail. Our licensors audit us twice a year.\n\nPriya: And honestly I'd love a dashboard where I can see which titles are stuck and why. Right now I find out when someone shouts at me.\n\nMarco: Is there a deadline?\n\nPriya: We relaunch in the first quarter. Daniel thinks that's too ambitious.\n\nDaniel: I think it's tight, yes. I'd rather start with artwork and metadata, and leave subtitles for a second phase.\n\nPriya: I disagree. Subtitles are where the delays are worst. But fine, let's talk about it.\n\nMarco: We'll come back to phasing. Last thing, who approves final output?\n\nPriya: Always a human editor. We will not publish anything automatically.",
+ "result": {
+  "provider": "groq",
+  "model": "openai/gpt-oss-120b",
+  "extraction": {
+   "report": {
+    "customer": {
+     "name": "Lumen Streaming",
+     "industry": "Streaming Media",
+     "summary": "Regional streaming service needing faster artwork, metadata, and subtitle processing for ~4,000 titles across six languages."
+    },
+    "requirements": [
+     {
+      "id": "R1",
+      "type": "integration",
+      "statement": "The solution must integrate with the existing custom CMS using its REST API without replacing the CMS.",
+      "priority": "must",
+      "confidence": "high",
+      "evidence": [
+       {
+        "quote": "We can't replace it this year, that's a hard constraint."
+       },
+       {
+        "quote": "The CMS is a custom system. It has a REST API but the documentation is out of date."
+       }
+      ]
+     },
+     {
+      "id": "R2",
+      "type": "functional",
+      "statement": "Automate image resizing for all required device formats.",
+      "priority": "should",
+      "confidence": "medium",
+      "evidence": [
+       {
+        "quote": "the artwork team resizes images by hand for each device"
+       }
+      ]
+     },
+     {
+      "id": "R3",
+      "type": "functional",
+      "statement": "Support ingestion of localisation files in multiple vendor‑provided formats.",
+      "priority": "should",
+      "confidence": "medium",
+      "evidence": [
+       {
+        "quote": "localisation vendors send back files in different formats."
+       }
+      ]
+     },
+     {
+      "id": "R4",
+      "type": "success_metric",
+      "statement": "Reduce average time to publish a new title from nine working days to three working days.",
+      "priority": "must",
+      "confidence": "high",
+      "evidence": [
+       {
+        "quote": "A new title takes about nine working days to go live. Our target is three."
+       }
+      ]
+     },
+     {
+      "id": "R5",
+      "type": "functional",
+      "statement": "Provide a dashboard that shows which titles are stuck and the reason for the delay.",
+      "priority": "should",
+      "confidence": "high",
+      "evidence": [
+       {
+        "quote": "I'd love a dashboard where I can see which titles are stuck and why."
+       }
+      ]
+     },
+     {
+      "id": "R6",
+      "type": "non_functional",
+      "statement": "Maintain a full audit trail for any subtitle processing activity.",
+      "priority": "must",
+      "confidence": "high",
+      "evidence": [
+       {
+        "quote": "anything that touches subtitles has to keep a full audit trail."
+       }
+      ]
+     },
+     {
+      "id": "R7",
+      "type": "constraint",
+      "statement": "All final output must be approved by a human editor before publishing; no automatic publishing.",
+      "priority": "must",
+      "confidence": "high",
+      "evidence": [
+       {
+        "quote": "We will not publish anything automatically."
+       }
+      ]
+     },
+     {
+      "id": "R8",
+      "type": "functional",
+      "statement": "The system must be capable of handling at least 150 new titles and 400 metadata corrections per month.",
+      "priority": "should",
+      "confidence": "medium",
+      "evidence": [
+       {
+        "quote": "Around 150 new titles a month, plus roughly 400 metadata corrections."
+       }
+      ]
+     },
+     {
+      "id": "R9",
+      "type": "functional",
+      "statement": "Replace the shared‑inbox artwork request process with a tracked workflow to eliminate waiting bottlenecks.",
+      "priority": "should",
+      "confidence": "medium",
+      "evidence": [
+       {
+        "quote": "Artwork requests sit in a shared inbox."
+       }
+      ]
+     }
+    ],
+    "stakeholders": [
+     {
+      "name": "Priya",
+      "role": "Head of Content Operations",
+      "concern": "Speeding up title go‑live, visibility of stuck titles, inclusion of subtitles in first phase."
+     },
+     {
+      "name": "Daniel",
+      "role": "Engineering Lead",
+      "concern": "Technical constraints around CMS integration, audit compliance, realistic timeline, phased rollout."
+     }
+    ],
+    "stated_metrics": [
+     {
+      "name": "New titles per month",
+      "value": 150,
+      "unit": "titles/month",
+      "evidence": {
+       "quote": "Around 150 new titles a month"
+      }
+     },
+     {
+      "name": "Metadata corrections per month",
+      "value": 400,
+      "unit": "corrections/month",
+      "evidence": {
+       "quote": "roughly 400 metadata corrections"
+      }
+     },
+     {
+      "name": "Target go‑live time",
+      "value": 3,
+      "unit": "working days",
+      "evidence": {
+       "quote": "Our target is three."
+      }
+     }
+    ],
+    "open_questions": [
+     {
+      "question": "Which device image dimensions and formats are required for automated resizing?",
+      "why_it_matters": "To design the image processing pipeline that meets all playback devices."
+     },
+     {
+      "question": "What specific file formats do localisation vendors currently deliver?",
+      "why_it_matters": "To ensure the system can ingest and normalize all incoming localisation assets."
+     },
+     {
+      "question": "What details must be captured in the subtitle audit trail?",
+      "why_it_matters": "Compliance with bi‑annual licensor audits requires a complete and searchable audit log."
+     },
+     {
+      "question": "What is the exact go‑live date for the Q1 relaunch?",
+      "why_it_matters": "To assess feasibility of the three‑day target and plan the phased rollout."
+     },
+     {
+      "question": "What dashboard metrics and alerts are most valuable to Priya’s team?",
+      "why_it_matters": "To design a monitoring view that surfaces stuck titles and root causes effectively."
+     },
+     {
+      "question": "What budget or resource constraints exist for the first phase (artwork & metadata)?",
+      "why_it_matters": "To scope the solution appropriately and avoid scope‑creep."
+     }
+    ],
+    "risks": [
+     {
+      "risk": "The Q1 relaunch deadline may be unrealistic given current process bottlenecks.",
+      "severity": "high"
+     },
+     {
+      "risk": "Disagreement on phasing (Priya wants subtitles early, Daniel prefers to defer) could cause scope creep or delays.",
+      "severity": "medium"
+     }
+    ],
+    "assumptions": [
+     "The custom CMS REST API is functional despite outdated documentation.",
+     "The volume of 150 new titles and 400 metadata corrections per month will remain roughly constant during implementation."
+    ]
+   },
+   "evidence": {
+    "total": 13,
+    "valid": 13,
+    "rate": 1,
+    "invalid": []
+   },
+   "meta": {
+    "usage": {
+     "inputTokens": 1349,
+     "outputTokens": 2361
+    },
+    "latencyMs": 5651,
+    "model": "openai/gpt-oss-120b",
+    "attempts": 1
+   }
+  },
+  "design": {
+   "data": {
+    "components": [
+     {
+      "id": "C1",
+      "name": "CMS Integration Service",
+      "responsibility": "Orchestrates title lifecycle, calls custom CMS REST API, records audit events, and routes data to downstream services.",
+      "tech": "Node.js + Express, hosted on managed container service",
+      "build_or_buy": "build",
+      "satisfies": [
+       "R1",
+       "R4",
+       "R6",
+       "R7"
+      ],
+      "size": "M",
+      "size_rationale": "Requires API work, data mapping, and audit logging but no complex UI."
+     },
+     {
+      "id": "C2",
+      "name": "Managed Image Resizing Service",
+      "responsibility": "Automatically generates all required device image sizes from source artwork.",
+      "tech": "Vendor‑neutral managed image‑processing API (e.g., Cloudinary, Imgix)",
+      "build_or_buy": "buy",
+      "satisfies": [
+       "R2"
+      ],
+      "size": "S",
+      "size_rationale": "Configuration only; no code development."
+     },
+     {
+      "id": "C3",
+      "name": "Localization Ingestion Engine",
+      "responsibility": "Parses vendor subtitle/localisation files, normalises them, stores them, and emits audit records.",
+      "tech": "Python FastAPI service with pluggable file‑format adapters",
+      "build_or_buy": "build",
+      "satisfies": [
+       "R3",
+       "R6",
+       "R8"
+      ],
+      "size": "M",
+      "size_rationale": "Needs format parsers and validation logic plus audit hooks."
+     },
+     {
+      "id": "C4",
+      "name": "Workflow Automation Platform",
+      "responsibility": "Provides a tracked, email‑intake workflow replacing the shared‑inbox request process, enforces human‑editor approval step.",
+      "tech": "Vendor‑neutral workflow SaaS with REST/webhook connectors",
+      "build_or_buy": "buy",
+      "satisfies": [
+       "R9",
+       "R7",
+       "R4"
+      ],
+      "size": "M",
+      "size_rationale": "Low‑code SaaS setup; integration points to C1, C2, C3."
+     },
+     {
+      "id": "C5",
+      "name": "Operations Dashboard",
+      "responsibility": "Shows titles in each workflow stage, highlights stuck items and reasons, pulls data from integration service and audit store.",
+      "tech": "React single‑page app + managed GraphQL layer",
+      "build_or_buy": "build",
+      "satisfies": [
+       "R5",
+       "R4"
+      ],
+      "size": "M",
+      "size_rationale": "Simple UI with read‑only queries; connects to existing data sources."
+     },
+     {
+      "id": "C6",
+      "name": "Audit Log Store",
+      "responsibility": "Immutable store of all subtitle processing actions and approval decisions for compliance.",
+      "tech": "Managed NoSQL document store (e.g., DynamoDB, Firestore)",
+      "build_or_buy": "build",
+      "satisfies": [
+       "R6"
+      ],
+      "size": "S",
+      "size_rationale": "Straightforward schema; write‑only from services."
+     }
+    ],
+    "integrations": [
+     {
+      "system": "Custom CMS",
+      "method": "REST API calls with OAuth",
+      "risk": "Medium – custom CMS version changes could break contracts"
+     }
+    ],
+    "mermaid_diagram": "flowchart LR\n    A[CMS] --> B[CMS Integration Service]\n    B --> C[Workflow Automation Platform]\n    C --> D[Managed Image Resizing Service]\n    C --> E[Localization Ingestion Engine]\n    D --> F[Audit Log Store]\n    E --> F[Audit Log Store]\n    C --> G[Human Editor]\n    G --> B\n    B --> A\n    B --> H[Operations Dashboard]\n    F --> H[Operations Dashboard]",
+    "tradeoffs": [
+     {
+      "decision": "Build",
+      "alternative": "Build custom CMS connector from scratch",
+      "reason": "Integration is limited to a single REST API; building gives precise control and avoids SaaS licensing."
+     },
+     {
+      "decision": "Buy managed service",
+      "alternative": "In‑house image processing pipeline",
+      "reason": "Image resizing is a well‑solved problem; a managed service reduces ops overhead and scales instantly."
+     },
+     {
+      "decision": "Buy low‑code workflow platform",
+      "alternative": "Custom workflow engine coded in‑house",
+      "reason": "Speed to market and built‑in tracking outweigh the modest cost; custom code would be larger (L) and riskier."
+     },
+     {
+      "decision": "Use managed NoSQL document store",
+      "alternative": "Store audit logs in relational DB",
+      "reason": "Audit entries are append‑only and schema‑flexible; NoSQL offers cheaper storage and easier scaling."
+     }
+    ],
+    "savings_drivers": [
+     {
+      "name": "Automated artwork resizing",
+      "items_per_month": 150,
+      "minutes_saved_low": 5,
+      "minutes_saved_likely": 10,
+      "minutes_saved_high": 15,
+      "volume_source": "stated",
+      "minutes_source": "assumed",
+      "note": "Eliminates manual image export for each device format."
+     },
+     {
+      "name": "Metadata correction automation",
+      "items_per_month": 400,
+      "minutes_saved_low": 3,
+      "minutes_saved_likely": 5,
+      "minutes_saved_high": 8,
+      "volume_source": "stated",
+      "minutes_source": "assumed",
+      "note": "Batch validation and API update reduces manual entry time."
+     },
+     {
+      "name": "Tracked workflow for artwork requests",
+      "items_per_month": 150,
+      "minutes_saved_low": 10,
+      "minutes_saved_likely": 15,
+      "minutes_saved_high": 20,
+      "volume_source": "stated",
+      "minutes_source": "assumed",
+      "note": "Removes inbox waiting; tasks move automatically through stages."
+     },
+     {
+      "name": "Dashboard visibility",
+      "items_per_month": null,
+      "minutes_saved_low": 10,
+      "minutes_saved_likely": 20,
+      "minutes_saved_high": 30,
+      "volume_source": "assumed",
+      "minutes_source": "assumed",
+      "note": "Quickly identifies stuck titles, cutting investigation time."
+     }
+    ],
+    "assumptions": [
+     "Cloud provider not specified; using vendor-neutral managed services (e.g., managed image resizing, managed workflow SaaS).",
+     "Device image dimensions and subtitle file formats to be clarified later.",
+     "User count for dashboard access not provided; assume < 50 internal users."
+    ]
+   },
+   "meta": {
+    "usage": {
+     "inputTokens": 1538,
+     "outputTokens": 2429
+    },
+    "latencyMs": 5844,
+    "model": "openai/gpt-oss-120b",
+    "attempts": 1
+   }
+  },
+  "designChecks": {
+   "componentCount": 6,
+   "danglingRefs": [],
+   "uncoveredMust": [],
+   "mermaidLooksValid": true,
+   "unorderedDrivers": []
+  },
+  "driverSourceFixes": [
+   "Automated artwork resizing: volume assumed -> stated",
+   "Metadata correction automation: volume assumed -> stated",
+   "Tracked workflow for artwork requests: volume assumed -> stated"
+  ],
+  "estimate": {
+   "config": {
+    "currency": "INR",
+    "symbol": "₹",
+    "dayRate": 10000,
+    "staffHourlyCost": 600,
+    "contingency": 0.2
+   },
+   "lines": [
+    {
+     "component": "CMS Integration Service",
+     "size": "M",
+     "low": 5,
+     "high": 10
+    },
+    {
+     "component": "Managed Image Resizing Service",
+     "size": "S",
+     "low": 2,
+     "high": 4
+    },
+    {
+     "component": "Localization Ingestion Engine",
+     "size": "M",
+     "low": 5,
+     "high": 10
+    },
+    {
+     "component": "Workflow Automation Platform",
+     "size": "M",
+     "low": 5,
+     "high": 10
+    },
+    {
+     "component": "Operations Dashboard",
+     "size": "M",
+     "low": 5,
+     "high": 10
+    },
+    {
+     "component": "Audit Log Store",
+     "size": "S",
+     "low": 2,
+     "high": 4
+    }
+   ],
+   "effortDays": {
+    "low": 24,
+    "likely": 43.2,
+    "high": 57.6
+   },
+   "buildCost": {
+    "low": 240000,
+    "likely": 432000,
+    "high": 576000
+   },
+   "monthlyHoursSaved": {
+    "low": 57.5,
+    "likely": 95.8,
+    "high": 140.8
+   },
+   "annualSavings": {
+    "low": 414000,
+    "likely": 690000,
+    "high": 1014000
+   },
+   "firstYearNet": {
+    "pessimistic": -162000,
+    "likely": 258000,
+    "optimistic": 774000
+   },
+   "paybackMonths": {
+    "pessimistic": 16.7,
+    "likely": 7.5,
+    "optimistic": 2.8
+   },
+   "quantifiedDrivers": [
+    "Automated artwork resizing",
+    "Metadata correction automation",
+    "Tracked workflow for artwork requests"
+   ],
+   "skippedDrivers": [
+    "Dashboard visibility"
+   ],
+   "assumedDriverCount": 3,
+   "caveats": [
+    "Build cost excludes recurring licence or hosting costs for 2 bought or integrated component(s): Managed Image Resizing Service, Workflow Automation Platform.",
+    "Savings count staff time only. The customer's cycle-time goal is not converted into money.",
+    "3 of 3 savings drivers rely on assumed numbers."
+   ]
+  },
+  "demo": {
+   "data": {
+    "app_name": "Lumen Streaming Processing Hub",
+    "tagline": "Accelerate title preparation with audit‑ready automation",
+    "theme": {
+     "primary": "#1E3A8A",
+     "tone": "corporate"
+    },
+    "screens": [
+     {
+      "id": "screen1",
+      "title": "Title Lifecycle Timeline",
+      "purpose": "Show the end‑to‑end processing steps for a title and current status",
+      "blocks": [
+       {
+        "type": "timeline",
+        "title": "Current Title Timeline",
+        "columns": [
+         "Step",
+         "Status"
+        ],
+        "rows": [
+         [
+          "Ingestion",
+          "Completed"
+         ],
+         [
+          "Image Resizing",
+          "In Progress"
+         ],
+         [
+          "Localization",
+          "Pending"
+         ],
+         [
+          "Human Editor Approval",
+          "Pending"
+         ],
+         [
+          "Publishing",
+          "Pending"
+         ]
+        ]
+       }
+      ]
+     },
+     {
+      "id": "screen2",
+      "title": "Stuck Titles Dashboard",
+      "purpose": "Identify titles that are delayed and why",
+      "blocks": [
+       {
+        "type": "table",
+        "title": "Delayed Titles",
+        "columns": [
+         "Title ID",
+         "Title Name",
+         "Current Stage",
+         "Delay Reason",
+         "Days Delayed",
+         "Requested Publish Date"
+        ],
+        "rows": [
+         [
+          "T-1023",
+          "Midnight Horizons",
+          "Image Resizing",
+          "Source artwork missing",
+          "2",
+          "2026-12-01"
+         ],
+         [
+          "T-1087",
+          "Solar Drift",
+          "Localization",
+          "Vendor file format mismatch",
+          "1",
+          "2026-12-03"
+         ],
+         [
+          "T-1102",
+          "Echoes of Dawn",
+          "Human Editor Approval",
+          "Pending editorial review",
+          "3",
+          "2026-12-05"
+         ]
+        ]
+       },
+       {
+        "type": "stat_row",
+        "title": "Stage Summary",
+        "columns": [
+         "Ingestion",
+         "Image Resizing",
+         "Localization",
+         "Awaiting Approval",
+         "Ready to Publish",
+         "Total"
+        ],
+        "rows": [
+         [
+          "120",
+          "95",
+          "78",
+          "45",
+          "30",
+          "368"
+         ]
+        ]
+       }
+      ]
+     },
+     {
+      "id": "screen3",
+      "title": "Subtitle Processing Audit",
+      "purpose": "Show recent audit entries for subtitle handling",
+      "blocks": [
+       {
+        "type": "table",
+        "title": "Recent Subtitle Audit Log",
+        "columns": [
+         "Title ID",
+         "Language",
+         "Action",
+         "Performed By",
+         "Timestamp",
+         "Notes"
+        ],
+        "rows": [
+         [
+          "T-1023",
+          "Spanish",
+          "Subtitle Ingested",
+          "Localization Engine",
+          "2026-11-09 14:22",
+          "Parsed VTT format"
+         ],
+         [
+          "T-1087",
+          "French",
+          "Subtitle Normalised",
+          "Localization Engine",
+          "2026-11-09 15:05",
+          "Converted to TTML"
+         ],
+         [
+          "T-1102",
+          "German",
+          "Approval Recorded",
+          "Human Editor",
+          "2026-11-09 16:40",
+          "Approved for publishing"
+         ]
+        ]
+       }
+      ]
+     },
+     {
+      "id": "screen4",
+      "title": "Artwork Request Form",
+      "purpose": "Capture new artwork requests via tracked workflow",
+      "blocks": [
+       {
+        "type": "form",
+        "title": "New Artwork Request",
+        "columns": [
+         "Title ID",
+         "Source Artwork URL",
+         "Target Formats (comma‑separated)",
+         "Requested By",
+         "Due Date"
+        ],
+        "rows": [
+         [
+          "T-1150",
+          "https://assets.lumenstreaming.com/artwork/T-1150/source.png",
+          "mobile,tablet,web",
+          "Content Ops",
+          "2026-11-15"
+         ]
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "meta": {
+    "usage": {
+     "inputTokens": 1110,
+     "outputTokens": 1623
+    },
+    "latencyMs": 3998,
+    "model": "openai/gpt-oss-120b",
+    "attempts": 1
+   }
+  },
+  "demoChecks": {
+   "screenCount": 4,
+   "primaryIsHex": true,
+   "raggedBlocks": []
+  },
+  "totals": {
+   "latencyMs": 15493,
+   "inputTokens": 3997,
+   "outputTokens": 6413,
+   "repairsNeeded": 0
+  }
+ },
+ "evalBadge": {
+  "weightedRecall": 0.8478,
+  "flagRecall": 0.667
+ },
+ "isExample": true
+}

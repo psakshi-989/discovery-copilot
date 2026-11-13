@@ -1,0 +1,14 @@
+{
+  "case": "streaming-ops",
+  "must_capture": [
+    { "id": "G1", "what": "Must integrate with the existing CMS, which can't be replaced this year", "weight": 3 },
+    { "id": "G2", "what": "Humans approve everything, with no auto-publishing", "weight": 3 }
+  ],
+  "must_flag": [
+    "Priya and Daniel disagree on whether subtitles go in phase 1"
+  ],
+  "traps": [
+    "Any budget figure or named vendor (nobody mentioned one)"
+  ],
+  "hand_estimate_days": { "low": 30, "high": 60 }
+}

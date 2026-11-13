@@ -1,0 +1,27 @@
+{
+  "case": "insurance_claims",
+  "must_capture": [
+    { "id": "G1", "what": "First-touch claims triage the same day, down from about two days", "weight": 3 },
+    { "id": "G2", "what": "The old policy system cannot be replaced this year and has no API; integration is nightly file export and import over SFTP, with nothing writing to it directly", "weight": 3 },
+    { "id": "G3", "what": "Every decision must be explainable to the regulator; no black-box approve or deny", "weight": 3 },
+    { "id": "G4", "what": "Any claim over five thousand dollars must be signed off by a human adjuster", "weight": 3 },
+    { "id": "G5", "what": "Customer data must not be sent to an outside party for training without legal review", "weight": 3 },
+    { "id": "G6", "what": "Handle missing-document requests, aiming for fewer than 10% of claims needing a second request (currently about 14% need extra documents)", "weight": 2 },
+    { "id": "G7", "what": "Claims arrive as emails, PDFs and photos and must be classified and routed to the right handler", "weight": 2 },
+    { "id": "G8", "what": "No regulatory findings is a success measure for compliance", "weight": 2 },
+    { "id": "G9", "what": "Customer chat assistant so people can ask where their claim is", "weight": 1 },
+    { "id": "G10", "what": "Volume is about 900 new claims a month", "weight": 1 }
+  ],
+  "must_flag": [
+    "Dana and Imran disagree on including fraud flagging in the first release, and the historical claims data quality is poor",
+    "The October (before storm season) deadline is only realistic for triage alone, as Imran says",
+    "Dana wants an adjuster to see every claim even under five thousand dollars, while Imran says the threshold is the rule"
+  ],
+  "traps": [
+    "Any budget or price figure (none was mentioned)",
+    "The number of claims officers or adjusters (not said)",
+    "A named cloud provider, AI vendor or model (none was named)",
+    "A named regulator or specific regulation (only 'the regulator' was said)"
+  ],
+  "hand_estimate_days": { "low": 50, "high": 95 }
+}

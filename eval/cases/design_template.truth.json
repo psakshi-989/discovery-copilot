@@ -1,0 +1,28 @@
+{
+  "case": "design_template",
+  "must_capture": [
+    { "id": "G1", "what": "Cut the contributor wait for a template review from about six days to 48 hours", "weight": 3 },
+    { "id": "G2", "what": "Templates using a third-party font need a human to verify the licence; they can never be auto-approved", "weight": 3 },
+    { "id": "G3", "what": "Human reviewers keep the final decision; the tool only suggests", "weight": 3 },
+    { "id": "G4", "what": "Pre-screening before a human reviews, flagging likely font and copied-artwork problems and showing reviewers why it was flagged", "weight": 3 },
+    { "id": "G5", "what": "No increase in rights complaints (copied artwork or unlicensed fonts must not slip through)", "weight": 3 },
+    { "id": "G6", "what": "Work with the existing internal admin tool through its status-change webhook and set-status endpoint, which has no bulk edit", "weight": 2 },
+    { "id": "G7", "what": "Nothing may depend on the checkout service this quarter", "weight": 2 },
+    { "id": "G8", "what": "Contributor-facing page showing where a submission is in review", "weight": 1 },
+    { "id": "G9", "what": "Search that understands styles or moods such as moody versus minimal", "weight": 1 },
+    { "id": "G10", "what": "Volume is about 1,200 submissions a week, with about 9% rejected for rights issues", "weight": 1 }
+  ],
+  "must_flag": [
+    "Hana and Rohan disagree on sequencing: pre-screening first versus cleaning the tagging data first",
+    "Tagging data is inconsistent, which undermines any screening that relies on tags",
+    "The March contributor conference deadline conflicts with Rohan's reluctance to promise 48 hours by then",
+    "The smarter-search request is vague and needs clarifying before it can be scoped"
+  ],
+  "traps": [
+    "Any budget or price figure (none was mentioned)",
+    "The number of reviewers or any headcount (not said)",
+    "A named cloud provider, machine-learning vendor or tool the customer uses (none was named)",
+    "An accuracy or false-positive target for the automated screening (none was given)"
+  ],
+  "hand_estimate_days": { "low": 45, "high": 85 }
+}
