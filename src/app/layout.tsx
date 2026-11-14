@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
         <main id="main">{children}</main>
         <footer className="foot">
-          <span>Built by {site.author}. Uses free AI models, so output can be wrong. Check it against the quotes.</span>
+          <span>Built by {site.author}.</span>
           {site.repoUrl ? <a href={site.repoUrl}>Source code</a> : null}
         </footer>
       </body>
